@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Backups de zellij (autogenerados)
+*.bak
+*.bak.*
+
+# Logs de los openers de yazi
+*.log
+
+# Config local de herramientas (coda u otras) — específica de la máquina
+.coda/

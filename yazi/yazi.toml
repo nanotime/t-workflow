@@ -1,0 +1,34 @@
+[mgr]
+ratio = [1, 4, 0]
+show_hidden = true
+
+[opener]
+# Manda `:open <archivo>` al pane llamado "Editor" (Helix) de la MISMA sesión.
+# Usa --session "$ZELLIJ_SESSION_NAME" para no colgarse: zellij necesita el
+# nombre real de la sesión, y con sesiones creadas con nombre fijo (ver `zj` en
+# .zshrc) esa variable siempre es correcta porque nunca se renombra.
+#
+# [MIGRACIÓN A MITOS] El opener `helix` queda comentado como referencia. El pane
+# "Editor" ahora corre `ms` (mitos); el comando `:open` es idéntico porque mitos
+# es un fork de Helix. Se usa la copia `mitos` de abajo.
+# helix = [
+#     { run = 's="$ZELLIJ_SESSION_NAME"; ed=$(zellij --session "$s" action list-panes | awk -F "  " "\$3==\"Editor\"{print \$1; exit}"); [ -n "$ed" ] && zellij --session "$s" action send-keys --pane-id "$ed" "Esc" && zellij --session "$s" action write-chars --pane-id "$ed" ":open %s1" && zellij --session "$s" action send-keys --pane-id "$ed" "Enter"', block = false, desc = "Open in Helix (Editor pane)" }
+# ]
+mitos = [
+    { run = 's="$ZELLIJ_SESSION_NAME"; ed=$(zellij --session "$s" action list-panes | awk -F "  " "\$3==\"Editor\"{print \$1; exit}"); [ -n "$ed" ] && zellij --session "$s" action send-keys --pane-id "$ed" "Esc" && zellij --session "$s" action write-chars --pane-id "$ed" ":open %s1" && zellij --session "$s" action send-keys --pane-id "$ed" "Enter"', block = false, desc = "Open in Mitos (Editor pane)" }
+]
+
+[open]
+rules = [
+    # [MIGRACIÓN A MITOS] Reglas originales a `helix` comentadas; ahora usan `mitos`.
+    # { mime = "text/*", use = "helix" },
+    # { mime = "application/json", use = "helix" },
+    # { mime = "application/javascript", use = "helix" },
+    # { mime = "application/x-yaml", use = "helix" },
+    # { mime = "application/toml", use = "helix" },
+    { mime = "text/*", use = "mitos" },
+    { mime = "application/json", use = "mitos" },
+    { mime = "application/javascript", use = "mitos" },
+    { mime = "application/x-yaml", use = "mitos" },
+    { mime = "application/toml", use = "mitos" },
+]

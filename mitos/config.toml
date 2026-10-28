@@ -1,0 +1,56 @@
+# ~/.config/helix/config.toml
+
+theme = "catppuccin_mocha"
+
+[editor]
+# Números de línea relativos: esenciales para saltar con `5j`, `12k`, etc.
+line-number = "relative"
+
+# Resalta la línea actual para no perder el cursor de vista.
+cursorline = true
+
+# Colorea el indicador de modo (NOR/INS) en la barra inferior.
+color-modes = true
+
+# Barra superior con todos los buffers abiertos (similar a pestañas).
+bufferline = "multiple"
+
+# Guías visuales para mantener un ancho de línea consistente.
+rulers = [80, 120]
+
+# Formatea automáticamente al guardar (requiere configurar formatters en languages.toml).
+auto-format = true
+
+# Habilita color verdadero (24-bit) si tu terminal lo soporta.
+true-color = true
+
+# Guarda automáticamente al perder el foco de la ventana (ideal con zellij).
+[editor.auto-save]
+focus-lost = true
+
+# Muestra líneas verticales sutiles que marcan los niveles de indentación.
+[editor.indent-guides]
+render = true
+
+# Opciones del LSP.
+[editor.lsp]
+# Muestra tipos inferidos en línea (puede ser ligeramente lento en algunos casos).
+display-inlay-hints = false
+# Muestra automáticamente la firma de la función mientras escribes argumentos.
+auto-signature-help = true
+# Ajuste de línea (soft-wrap).
+# NOTA: Esto afecta a TODOS los archivos. En la siguiente sesión lo movemos a
+# languages.toml para que solo se aplique a Markdown y no a código.
+[editor.soft-wrap]
+enable = true
+# Hace que el ajuste respete el ancho definido en `text-width` (si lo configuras).
+wrap-at-text-width = false
+
+[editor.file-picker]
+hidden = false
+git-ignore = false
+
+[keys.normal.space]
+z = ":toggle lsp.display-inlay-hints"
+
+
